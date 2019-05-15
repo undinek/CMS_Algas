@@ -6,5 +6,5 @@ define("PASS", "");
 define("DB","algu_sistema");
 
 // Nomainīju uz repo ceļu
-define("DOMAIN","http://localhost/CMS_Algas/Faili");
+define("DOMAIN","http://localhost/Faili");
  ?>

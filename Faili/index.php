@@ -1,5 +1,6 @@
 <?php
 include_once("./database/constants.php");
+include_once("./templates/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +61,10 @@ include_once("./database/constants.php");
 
                 </form>
             </div>
-            <div class="card-footer"><a href="#">Aizmirsi paroli?</a></div>
+            <div class="card-footer"><a href="#">Aizmirsi paroli?</a>
+			</div>
+        </div>
+		 
         </div>
     </div>
 

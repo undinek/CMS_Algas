@@ -128,7 +128,22 @@ class User
           }
       }
 
-      if($role->notAdmin()){
+      if($role->admin()){
+          $res = $this->con->prepare("SELECT * FROM users WHERE org_key = ?");
+          $res->bind_param("s",$userOrg);
+          $res->execute() or die($this->con->error);
+          $result = $res->get_result();
+
+          foreach($result as $row){
+              $username = $row["username"];
+              $email = $row["email"];
+              echo '<tr>
+                    <td>'.$username.'</td>
+                    <td>'.$email.'</td>
+                    </tr>';
+          }
+		  
+		 if($role->user()){
           $res = $this->con->prepare("SELECT * FROM users WHERE org_key = ?");
           $res->bind_param("s",$userOrg);
           $res->execute() or die($this->con->error);
@@ -146,4 +161,5 @@ class User
 
 
   }
+}
 }

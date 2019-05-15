@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var DOMAIN = "http://localhost/CMS_Algas/Faili";
+  var DOMAIN = "http://localhost/Faili";
   $("#register_form").on("submit", function() {
     var status = false;
     var username = $("#username");

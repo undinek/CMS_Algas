@@ -31,8 +31,30 @@ class Role{
         }
 
     }
+	
+	public function admin(){
 
-    public function notAdmin(){
+        $userId = $_SESSION["userid"];
+
+        $result = $this->con->prepare("
+                SELECT role
+                FROM users
+                WHERE id = $userId
+        ");
+
+        $result->execute();
+        $result->store_result();
+        $result->bind_result($userRole);
+        $result->fetch();
+
+        if ($userRole == "Admin" ){
+            return true;
+        }
+
+
+    }
+
+    public function user(){
 
         $userId = $_SESSION["userid"];
 
