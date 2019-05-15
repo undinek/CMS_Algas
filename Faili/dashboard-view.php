@@ -10,12 +10,12 @@
 	
 	<?php if ($role->user()) :?>
         
-        <p>show salary for year</p>
+        <p>can see his salary for year</p>
 		
 
 	<?php elseif ($role->admin()) :?>
         
-        <p>add user salary</p>
+        <p>can add user salary</p>
 		<form id="add_salary">
 			 <div class="form-group">
                         <label for="user">User</label>
@@ -34,7 +34,7 @@
 
 	<?php elseif ($role->superAdmin()) :?>
         
-        <p>add organizations and users</p>
+        <p>can add organizations and users</p>
 
 	<?php else : ?>
       <?php header("Location: http://localhost/Faili"); ?>
