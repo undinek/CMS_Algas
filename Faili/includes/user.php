@@ -58,6 +58,8 @@ class User
     }else {
       $row = $result->fetch_assoc();
       if (password_verify($password,$row["password"])) {
+        
+        $_SESSION["isLoggedIn"] = true;
         $_SESSION["userid"] = $row["id"];
         $_SESSION["username"] = $row["username"];
         $_SESSION["last_login"] = $row["last_login"];

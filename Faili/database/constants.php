@@ -5,5 +5,6 @@ define("USER", "root");
 define("PASS", "");
 define("DB","algu_sistema");
 
-define("DOMAIN","http://localhost/algusistema");
+// Nomainīj uz repo ceļu 
+define("DOMAIN","http://localhost/CMS_Algas/Faili");
  ?>

@@ -1,6 +1,8 @@
 <?php
 include_once("../database/constants.php");
 include_once("user.php");
+// Nevarēja ielogoties bez šī
+header('Access-Control-Allow-Origin: *');
 
 //For registration procesing
 if (isset($_POST["username"]) AND isset($_POST["email"])) {

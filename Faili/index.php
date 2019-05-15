@@ -1,9 +1,10 @@
-<?php 
+<?php
 include_once("./database/constants.php");
 // if (isset($_SESSION["userid"])) {
 //     header("location:".DOMAIN."/dashboard.php");
 // }
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -28,11 +29,6 @@ include_once("./database/constants.php");
 </head>
 
 <body>
-
-    <?php
-      // Navbar
-      include_once("./templates/header.php");
-      ?>
     <br><br>
     <div class="container">
         <?php

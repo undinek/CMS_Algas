@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var DOMAIN = "http://localhost/algusistema";
+  var DOMAIN = "http://localhost/CMS_Algas/Faili";
   $("#register_form").on("submit", function() {
     var status = false;
     var username = $("#username");
@@ -134,7 +134,7 @@ $(document).ready(function() {
             );
           } else {
             console.log(data);
-            alert("Esat veiksmigi pieslēdzies");
+            window.location.href = encodeURI( DOMAIN + "/dashboard-view.php");
           }
         }
       });
