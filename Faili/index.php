@@ -1,8 +1,5 @@
 <?php
 include_once("./database/constants.php");
-// if (isset($_SESSION["userid"])) {
-//     header("location:".DOMAIN."/dashboard.php");
-// }
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +57,7 @@ include_once("./database/constants.php");
                         <small id="p_error" class="form-text text-muted"></small>
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-lock">&nbsp;</i>Pieslēgties</button>
-                    <span><a href="register.php">Reģistrēties</a></span>
+
                 </form>
             </div>
             <div class="card-footer"><a href="#">Aizmirsi paroli?</a></div>

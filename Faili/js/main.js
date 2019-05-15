@@ -12,6 +12,7 @@ $(document).ready(function() {
     var e_patt = new RegExp(
       /^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/
     );
+    var orgName = $("input[name=orgDropdown]");
     //Checks username
     if (username.val() == "" || username.val().length < 6) {
       username.addClass("border-danger");
@@ -74,8 +75,9 @@ $(document).ready(function() {
           } else {
             window.location.href = encodeURI(
               DOMAIN +
-                "/index.php?msg=Esat reģistrējeis, tagad varat pieslēgties"
+                "/user-view.php"
             );
+            // console.log(data);
           }
         }
       });
@@ -133,11 +135,45 @@ $(document).ready(function() {
               "<span class = 'text-danger'>Lūdzu ievadiet pareizu paroli</span>"
             );
           } else {
-            console.log(data);
+            // console.log(data);
             window.location.href = encodeURI( DOMAIN + "/dashboard-view.php");
           }
         }
       });
     }
   });
+
+  /*Add org page
+  =========================*/
+
+  $(".addOrg").click(function(){
+      window.location.href = encodeURI( DOMAIN + "/add-organization-view.php" );
+  });
+
+  var orgName = $("input[name=orgName]");
+
+  $("#addOrganizationForm").on("submit", function() {
+
+      if(orgName.val() != null || orgName.val() != "" ){
+
+          $.ajax({
+              url: DOMAIN + "/includes/process.php",
+              method: "POST",
+              data: $("#addOrganizationForm").serialize(),
+              success: function(data) {
+
+                  window.location.href = encodeURI( DOMAIN + "/organization-view.php" );
+                  // console.log(data);
+
+                }
+          });
+      }
+  });
+
+  $(".addUser").click(function(){
+       window.location.href = encodeURI( DOMAIN + "/register.php" );
+       console.log("yeah");
+   });
+
+
 });

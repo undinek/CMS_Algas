@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+  session_start();
+  include_once("includes/Role.php");?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -16,15 +19,14 @@
     </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="./includes/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
     <script type="text/javascript" src="./js/main.js"></script>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Algu aprēķina sistēma</a>
+    <a class="navbar-brand" href="#">Algu aprēķina sistēma |</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,19 +34,26 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#"><i class="fa fa-home">&nbsp;</i>Sākums<span
+                <a class="nav-link" href="dashboard-view.php"><i class="fa fa-home">&nbsp;</i>Sākums<span
                         class="sr-only">(current)</span></a>
             </li>
 
-            <?php
-      if (isset($_SESSION["userid"])) {
-        ?>
-            <li class="nav-item active">
-                <a class="nav-link" href="logout.php"><i class="fa fa-user">&nbsp;</i>Atslēgties</a>
-            </li>
-            <?php
-      }
-      ?>
+
+            <?php if (isset($_SESSION["isLoggedIn"])) : ?>
+                  <?php $role = new Role; ?>
+                  <?php if ($role->superAdmin()) :?>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="organization-view.php"><i class="far fa-building">&nbsp;</i>Organizācijas</a>
+                      </li>
+
+                  <?php endif; ?>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="user-view.php"><i class="fa fa-user">&nbsp;</i>Lietotāji</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt">&nbsp;</i>Atslēgties</a>
+                  </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>
