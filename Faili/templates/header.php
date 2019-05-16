@@ -45,6 +45,9 @@ include_once ("includes/Role.php"); ?>
                       <li class="nav-item active">
                           <a class="nav-link" href="organization-view.php"><i class="far fa-building">&nbsp;</i>Organizācijas</a>
                       </li>
+					   <li class="nav-item active">
+                      <a class="nav-link" href="user-view.php"><i class="fa fa-user">&nbsp;</i>Lietotāji</a>
+                  </li>
 
 
                   <?php
@@ -52,6 +55,9 @@ include_once ("includes/Role.php"); ?>
                       <li class="nav-item active">
                           <a class="nav-link" href="add-salary-view.php"><i class="fa fa-plus ">&nbsp;</i>Algas</a>
                       </li>
+					   <li class="nav-item active">
+                      <a class="nav-link" href="user-view.php"><i class="fa fa-user">&nbsp;</i>Lietotāji</a>
+                  </li>
 					  
 					  <?php
     elseif ($role->user()): ?>
@@ -61,9 +67,7 @@ include_once ("includes/Role.php"); ?>
 
                   <?php
     endif; ?>
-                  <li class="nav-item active">
-                      <a class="nav-link" href="user-view.php"><i class="fa fa-user">&nbsp;</i>Lietotāji</a>
-                  </li>
+                 
                   <li class="nav-item active">
                       <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt">&nbsp;</i>Atslēgties</a>
                   </li>
