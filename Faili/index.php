@@ -1,6 +1,6 @@
 <?php
-include_once("./database/constants.php");
-include_once("./templates/header.php");
+include_once ("./database/constants.php");
+include_once ("./templates/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +30,8 @@ include_once("./templates/header.php");
     <br><br>
     <div class="container">
         <?php
-            if (isset($_GET["msg"]) AND !empty($_GET["msg"])) {
-              ?>
+if (isset($_GET["msg"]) AND !empty($_GET["msg"])) {
+?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?php echo $_GET["msg"] ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -39,8 +39,8 @@ include_once("./templates/header.php");
             </button>
         </div>
         <?php
-            }
-         ?>
+}
+?>
         <div class="card mx-auto" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title"></h5>

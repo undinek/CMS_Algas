@@ -1,6 +1,6 @@
 <?php
-  session_start();
-  include_once("includes/Role.php");?>
+session_start();
+include_once ("includes/Role.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -39,21 +39,36 @@
             </li>
 
 
-            <?php if (isset($_SESSION["isLoggedIn"])) : ?>
+            <?php if (isset($_SESSION["isLoggedIn"])): ?>
                   <?php $role = new Role; ?>
-                  <?php if ($role->superAdmin()) :?>
+                  <?php if ($role->superAdmin()): ?>
                       <li class="nav-item active">
                           <a class="nav-link" href="organization-view.php"><i class="far fa-building">&nbsp;</i>Organizācijas</a>
                       </li>
 
-                  <?php endif; ?>
+
+                  <?php
+    elseif ($role->admin()): ?>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="add-salary-view.php"><i class="fa fa-plus ">&nbsp;</i>Algas</a>
+                      </li>
+					  
+					  <?php
+    elseif ($role->user()): ?>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="salary-view.php"><i class="fa fa-eye ">&nbsp;</i>Mana alga</a>
+                      </li>
+
+                  <?php
+    endif; ?>
                   <li class="nav-item active">
                       <a class="nav-link" href="user-view.php"><i class="fa fa-user">&nbsp;</i>Lietotāji</a>
                   </li>
                   <li class="nav-item active">
                       <a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt">&nbsp;</i>Atslēgties</a>
                   </li>
-            <?php endif; ?>
+            <?php
+endif; ?>
         </ul>
     </div>
 </nav>
