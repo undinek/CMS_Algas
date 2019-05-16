@@ -10,19 +10,19 @@
 	
 	<?php if ($role->user()): ?>
         
-        <p>can see his salary for year</p>
+        <p>User - can see his salary for year</p>
 		
 
 	<?php
     elseif ($role->admin()): ?>
         
-        <p>can add user salary</p>
+        <p>Admin - can add user salary</p>
 		
 
 	<?php
     elseif ($role->superAdmin()): ?>
         
-        <p>can add organizations and users</p>
+        <p>SuperAdmin - can add organizations and users</p>
 
 	<?php
     else: ?>

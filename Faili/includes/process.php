@@ -29,3 +29,13 @@ if (isset($_POST["orgName"])) {
   echo $result;
   exit();
 }
+
+//For adding salary
+
+if (isset($_POST["salary"])) {
+  $org = new Organization();
+  $result = $org->saveOrganization($_POST["user", "salary"]);
+  echo $result;
+  exit();
+}
+

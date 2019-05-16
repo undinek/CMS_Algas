@@ -1,6 +1,6 @@
 <?php
 include_once("./templates/header.php");
-include_once("includes/Organization.php");
+include_once("includes/Salary.php");
 include_once("./includes/Role.php");
 ?>
 
@@ -10,7 +10,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && $role->
 
 <div class="container" style="padding-top:5rem;">
         <div class="card mx-auto" style="width: 30rem;">
-        <form id="add_salary">
+        <form id="addSalaryForm" method="post" onsubmit="return false" autocomplete="off">
              <div class="form-group">
                         <label for="user">User</label>
                         <input type="text" name="user" class="form-control" id="user"

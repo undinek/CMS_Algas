@@ -1,6 +1,7 @@
+
 <?php
+
 include_once("./templates/header.php");
-include_once("includes/Organization.php");
 include_once("./includes/Role.php");
 ?>
 
