@@ -76,4 +76,18 @@ class Role{
 
     }
 
+        // Reģistrācijas lapā ielādē iekš dropdown organizācijas
+        public function loadRoleInDropdown(){
+            include_once("database/db.php");
+            $db = new Database();
+            $this->con = $db->connect();
+    
+            $res = $this->con->query("SELECT DISTINCT role FROM `users` ORDER BY ROLE");
+            foreach($res as $row){
+                $value = $row["role"];
+                $name = $row["role"];
+                echo "<option value='$value'>$name</option>";
+            }
+        }
+
 }

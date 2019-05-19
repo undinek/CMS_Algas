@@ -32,7 +32,7 @@ class User
     }
   }
 
-  public function createUserAccount($username,$email,$password,$organization){
+  public function createUserAccount($username,$email,$password,$organization,$role){
 
     include_once("../database/db.php");
     $db = new Database();
@@ -45,11 +45,11 @@ class User
       $pass_hash = password_hash($password,PASSWORD_BCRYPT,["cost"=>8]);
       $date = date("Y-m-d");
       $notes = "";
-      $pre_stmt = $this->con->prepare("INSERT INTO `users`(`username`, `email`, `password`, `register_date`, `last_login`, `notes`, `org_key`)
-      VALUES (?,?,?,?,?,?,?)");
+      $pre_stmt = $this->con->prepare("INSERT INTO `users`(`username`, `email`, `password`, `register_date`, `last_login`, `notes`, `role`, `org_key`)
+      VALUES (?,?,?,?,?,?,?,?)");
 
       if($pre_stmt !== FALSE) {
-          $pre_stmt->bind_param("sssssss", $username,$email,$pass_hash,$date,$date,$notes,$organization);
+          $pre_stmt->bind_param("ssssssss", $username,$email,$pass_hash,$date,$date,$notes,$role,$organization);
           $result = $pre_stmt->execute() or die($this->con->error);
 
           if ($result) {
@@ -160,6 +160,19 @@ class User
       }
 
 
+  }
+}
+
+public function loadUserInDropdown(){
+  include_once("database/db.php");
+  $db = new Database();
+  $this->con = $db->connect();
+
+  $res = $this->con->query("SELECT * FROM `users` ORDER BY `id` ASC");
+  foreach($res as $row){
+      $id = $row["id"];
+      $name = $row["email"];
+      echo "<option value='$id'>$name</option>";
   }
 }
 }

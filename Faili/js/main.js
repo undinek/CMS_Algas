@@ -177,3 +177,20 @@ $(document).ready(function() {
 
 
 });
+
+var salaryValue = $("input[name=salaryValue]");
+$("#addSalaryForm").on("submit", function() {
+
+    if(salaryValue.val() != null || salaryValue.val() != "" ){
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: $("#addSalaryForm").serialize(),
+            success: function(data) {
+
+                window.location.href = encodeURI( DOMAIN + "/salary-view.php" );
+
+              }
+        });
+    }
+});

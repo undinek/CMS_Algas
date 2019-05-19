@@ -2,11 +2,17 @@
     // Navbar
     include_once("./templates/header.php");
     include_once("includes/Organization.php");
+    include_once("includes/Role.php");
 ?>
+
+<?php
+if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && ($role->admin() || $role->superAdmin())):
+?>
+
     <br><br>
     <div class="container">
         <div class="card mx-auto" style="width: 30rem;">
-            <div class="card-header">Reģistrēties</div>
+            <div class="card-header">Pievienot jaunu lietotāju</div>
             <div class="card-body">
                 <form id="register_form" onsubmit="return false" autocomplete="off">
                     <div class="form-group">
@@ -44,6 +50,16 @@
                           </select>
                     </div>
 
+                    <div class="form-group">
+                          <select name="roleDropdown" class="select-css">
+                            <option value="--">Lietotāja grupa</option>
+                            <?php
+                            $role = new Role;
+                            echo $role->loadRoleInDropdown();
+                            ?>
+                          </select>
+                    </div>
+
                     <button type="submit" name="user_register" class="btn btn-primary">
                         <span class="fa fa-user"></span>&nbsp;Reģistrēt</button>
                 </form>
@@ -54,3 +70,13 @@
 </body>
 
 </html>
+<?php
+
+else:
+?>
+     <?php
+    header("Location: http://localhost/CMS_Algas/Faili/dashboard-view.php");
+?>
+ <?php
+endif;
+?>

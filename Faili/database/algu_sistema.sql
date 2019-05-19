@@ -22,6 +22,20 @@ SET time_zone = "+00:00";
 -- Database: `algu_sistema`
 --
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `salary`
+--
+
+CREATE TABLE `salary` (
+  `org_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `salary` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 -- --------------------------------------------------------
 
 --
