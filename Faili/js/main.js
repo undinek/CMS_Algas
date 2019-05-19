@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var DOMAIN = "http://localhost/Faili";
+  var DOMAIN = "http://localhost/CMS_Algas/Faili";
   $("#register_form").on("submit", function() {
     var status = false;
     var username = $("#username");
@@ -172,25 +172,28 @@ $(document).ready(function() {
 
   $(".addUser").click(function(){
        window.location.href = encodeURI( DOMAIN + "/register.php" );
-       console.log("yeah");
    });
 
 
-});
+   /*Add salary page
+   =========================*/
 
-var salaryValue = $("input[name=salaryValue]");
-$("#addSalaryForm").on("submit", function() {
+   var salaryValue = $("input[name=salaryValue]");
+   $("#addSalaryForm").on("submit", function() {
 
-    if(salaryValue.val() != null || salaryValue.val() != "" ){
-        $.ajax({
-            url: DOMAIN + "/includes/process.php",
-            method: "POST",
-            data: $("#addSalaryForm").serialize(),
-            success: function(data) {
+       if(salaryValue.val() != null || salaryValue.val() != "" ){
+           $.ajax({
+               url: DOMAIN + "/includes/process.php",
+               method: "POST",
+               data: $("#addSalaryForm").serialize(),
+               success: function(data) {
 
-                window.location.href = encodeURI( DOMAIN + "/salary-view.php" );
+                   window.location.href = encodeURI( DOMAIN + "/salary-view.php" );
 
-              }
-        });
-    }
+                 }
+           });
+       }
+   });
+
+
 });
