@@ -13,10 +13,9 @@ include_once("./includes/user.php");
                 <form id="addSalaryForm" method="post" onsubmit="return false" autocomplete="off">
                 <div class="form-group">
                           <select name="orgDropdown" class="select-css">
-                            <option value="--">Lietotāja organizācija</option>
                             <?php
                             $org = new Organization;
-                            echo $org->loadOrganizationInDropdown();
+                            echo $org->loadCurrentUserOrganization();
                             ?>
                           </select>
                     </div>
@@ -26,7 +25,7 @@ include_once("./includes/user.php");
                             <option value="--">Organizacijas lietotajs</option>
                             <?php
                             $user = new User;
-                            echo $user->loadUserInDropdown();
+                            echo $user->LoadOrganizationUsersDropdown();
                             ?>
                           </select>
                     </div>

@@ -175,4 +175,21 @@ public function loadUserInDropdown(){
       echo "<option value='$id'>$name</option>";
   }
 }
+
+public function LoadOrganizationUsersDropdown(){
+  include_once("database/db.php");
+  include_once("Organization.php");
+  $db = new Database();
+  $this->con = $db->connect();
+  $user= new Organization();
+  $currentUserOrganization = $user->getCurrentUserOrganization();
+  
+
+  $res = $this->con->query("SELECT users.username, users.id FROM users LEFT JOIN organizations ON users.org_key = organizations.id WHERE organizations.org_name = '$currentUserOrganization' ");
+  foreach($res as $row){
+      $id = $row["id"];
+      $name = $row["username"];
+      echo "<option value='$id'>$name</option>";
+  }
+}
 }
