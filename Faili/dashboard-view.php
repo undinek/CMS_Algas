@@ -12,7 +12,6 @@
         
         <p>can see his salary for year</p>
 		
-
 	<?php
     elseif ($role->admin()): ?>
         
@@ -26,7 +25,7 @@
 
 	<?php
     else: ?>
-      <?php header("Location:  http://localhost/CMS_Algas/Faili/"); ?>
+      <?php header("Location:  http://127.0.0.1/CMS_Algas/Faili/"); ?>
 	<?php
     endif; ?>
 	<?php

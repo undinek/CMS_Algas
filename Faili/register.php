@@ -75,7 +75,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && ($role-
 else:
 ?>
      <?php
-    header("Location: http://localhost/CMS_Algas/Faili/dashboard-view.php");
+    header("Location: http://127.0.0.1/CMS_Algas/Faili/dashboard-view.php");
 ?>
  <?php
 endif;

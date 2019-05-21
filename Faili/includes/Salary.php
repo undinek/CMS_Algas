@@ -25,4 +25,20 @@ class Salary{
 
         return $response;
     }
+
+    public function loadCurrentUserSalary(){
+        $userId = $_SESSION["userid"];
+
+        include_once("database/db.php");
+        $db = new Database();
+        $this->con = $db->connect();
+
+        $res = $this->con->query("SELECT salary FROM salary WHERE user_id = $userId");
+        foreach($res as $row){
+            $salary = $row["salary"];
+            echo '<tr>
+                  <td>'.$salary.'</td>
+                  </tr>';
+        }
+    }
 }
