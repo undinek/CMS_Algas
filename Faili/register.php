@@ -53,10 +53,8 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && ($role-
                     <div class="form-group">
                           <select name="roleDropdown" class="select-css">
                             <option value="--">Lietotāja grupa</option>
-                            <?php
-                            $role = new Role;
-                            echo $role->loadRoleInDropdown();
-                            ?>
+                            <option value="User">User</option>
+                            <option value="Admin">Admin</option>
                           </select>
                     </div>
 

@@ -31,7 +31,7 @@ class Role{
         }
 
     }
-	
+
 	public function admin(){
 
         $userId = $_SESSION["userid"];
@@ -81,7 +81,7 @@ class Role{
             include_once("database/db.php");
             $db = new Database();
             $this->con = $db->connect();
-    
+
             $res = $this->con->query("SELECT DISTINCT role FROM `users` ORDER BY ROLE");
             foreach($res as $row){
                 $value = $row["role"];

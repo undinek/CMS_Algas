@@ -34,8 +34,7 @@ if (isset($_POST["orgName"])) {
 // For adding salary
 if (isset($_POST["salaryValue"])) {
   $sal = new Salary();
-  $result = $sal->addSalary($_POST["orgDropdown"], $_POST["userDropdown"], $_POST["salaryValue"]);
+  $result = $sal->addSalary($_POST["orgDropdown"], $_POST["userDropdown"], $_POST["salaryValue"], $_POST["apgadajamieValue"], $_POST["atvieglojumiDropdown"]);
   echo $result;
   exit();
 }
-

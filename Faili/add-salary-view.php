@@ -31,9 +31,16 @@ include_once("./includes/user.php");
                     </div>
                     <div class="form-group">
                         <label>Alga</label>
-                        <input type="number" name="salaryValue" class="form-control" id="salaryValue" placeholder="alga">
+                        <input type="number" min="0" name="salaryValue" class="form-control" id="salaryValue" placeholder="alga">
                         <small id="u_error" class="form-text text-muted"></small>
                     </div>
+
+                    <div class="form-group">
+                        <label>Apgādājamo skaits</label>
+                        <input type="number" min="0" name="apgadajamieValue" class="form-control" id="apgadajamieValue" placeholder="Apgādājamo sk.">
+                        <small id="u_error" class="form-text text-muted"></small>
+                    </div>
+
                     <button type="submit" name="addSalary" class="btn btn-primary btnAddSalary">
                         <span class="fa fa-plus"></span>&nbsp;Pievienot</button>
                 </form>

@@ -82,7 +82,7 @@ class Organization{
         $this->con = $db->connect();
 
         $res = $this->con->query("SELECT organizations.org_name FROM organizations LEFT JOIN users ON organizations.id = users.org_key WHERE users.id = $userId");
-        
+
         foreach($res as $row){
             $name = $row["org_name"];
         }
