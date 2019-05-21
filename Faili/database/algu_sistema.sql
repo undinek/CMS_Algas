@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2019 at 11:37 PM
+-- Generation Time: May 21, 2019 at 09:17 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -22,20 +22,6 @@ SET time_zone = "+00:00";
 -- Database: `algu_sistema`
 --
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `salary`
---
-
-CREATE TABLE `salary` (
-  `org_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `salary` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 -- --------------------------------------------------------
 
 --
@@ -53,6 +39,29 @@ CREATE TABLE `organizations` (
 
 INSERT INTO `organizations` (`id`, `org_name`) VALUES
 (16, 'Vienalga');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `salary`
+--
+
+CREATE TABLE `salary` (
+  `id` int(11) NOT NULL,
+  `org_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `salary` varchar(255) NOT NULL,
+  `IIN` double NOT NULL,
+  `socialais_nod` double NOT NULL,
+  `darba_dev_izmaksas` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `salary`
+--
+
+INSERT INTO `salary` (`id`, `org_id`, `user_id`, `salary`, `IIN`, `socialais_nod`, `darba_dev_izmaksas`) VALUES
+(3, 16, 8, '800', 96.4, 88, 993.08);
 
 -- --------------------------------------------------------
 
@@ -77,8 +86,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `register_date`, `last_login`, `notes`, `role`, `org_key`) VALUES
-(5, 'SuperAdmin', 'admin@admin.com', '$2y$08$eC8aULvqmee3uvvJD0uWaumD5mYUhr3siL2OxhKEAdrrgq8EYhNCq', '2019-05-15', '2019-05-15 11:05:04', '', 'Superadmin', 0),
-(8, 'lietotajs', 'example@example.com', '$2y$08$KIDmi0/flhcMkV5oX3gg1uBvv/PiY0NG8ubzjUGikYniB7vEah3zC', '2019-05-15', '2019-05-15 00:00:00', '', 'User', 16);
+(5, 'SuperAdmin', 'admin@admin.com', '$2y$08$eC8aULvqmee3uvvJD0uWaumD5mYUhr3siL2OxhKEAdrrgq8EYhNCq', '2019-05-15', '2019-05-21 09:05:14', '', 'Superadmin', 0),
+(8, 'lietotajs', 'example@example.com', '$2y$08$KIDmi0/flhcMkV5oX3gg1uBvv/PiY0NG8ubzjUGikYniB7vEah3zC', '2019-05-15', '2019-05-21 08:05:06', '', 'User', 16),
+(10, 'boss', 'boss@boss.com', '$2y$08$6GaIPlNTyG2IyRHM6HvCZ.Q927eCgum1QqFKBuOru6V.pydLIDtiK', '2019-05-21', '2019-05-21 09:05:47', '', 'Admin', 16);
 
 --
 -- Indexes for dumped tables
@@ -88,6 +98,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `register_date`, `la
 -- Indexes for table `organizations`
 --
 ALTER TABLE `organizations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `salary`
+--
+ALTER TABLE `salary`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -108,10 +124,16 @@ ALTER TABLE `organizations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `salary`
+--
+ALTER TABLE `salary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
