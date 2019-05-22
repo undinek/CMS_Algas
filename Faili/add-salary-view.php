@@ -64,11 +64,13 @@ include_once("./includes/user.php");
                          data-view="months"
                          data-date-format="MM yyyy" />
                        </label>
+                       <small id="date_error" class="form-text text-muted"></small>
                     </div>
 
 
                     <button type="submit" name="addSalary" class="btn btn-primary btnAddSalary">
                         <span class="fa fa-plus"></span>&nbsp;Pievienot</button>
+                        <small id="button_error" class="form-text text-muted"></small>
                 </form>
             </div>
         </div>
