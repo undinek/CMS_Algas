@@ -5,7 +5,7 @@ include_once("./includes/Salary.php");
 include_once("./includes/Organization.php");
 ?>
 
-<?php if (isset($_SESSION['isLoggedIn'])): ?>
+<?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true): ?>
 
 <?php
     $role = new Role;
