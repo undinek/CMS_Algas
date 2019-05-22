@@ -44,20 +44,57 @@ class Salary{
         $darbaDevejaIzmaksas = $salary + $darbaDevejaVSAOI + $riskaNodeva;
 
         $pre_stmt = $this->con->prepare("
+            SELECT *
+            FROM salary
+            WHERE year = ?
+            AND month = ?
+            AND user_id = ?");
+
+        $pre_stmt->bind_param("isi", $salaryYear, $salaryMonth, $user_id);
+        $pre_stmt->execute();
+        $result = $pre_stmt->get_result();
+        $count = $result->num_rows;
+
+        $pre_stmt2 = $this->con->prepare("
+            UPDATE salary
+            SET salary=?, IIN=?, socialais_nod=?, darba_dev_izmaksas=?
+            WHERE user_id=?
+            AND year=?
+            AND month=?");
+
+        $pre_stmt3 = $this->con->prepare("
             INSERT INTO `salary`(`org_id`, `user_id`, `salary`, `IIN`, `socialais_nod`, `darba_dev_izmaksas`, `year`, `month` )
             VALUES (?,?,?,?,?,?,?,?)");
 
+        // Ja tabulā jau pievienota alga konkrētajam mēnesim/gadam pārrakstam ievadītās algas vērtības
+        // Ja nav tad izveido jaunu ierakstu
         $response = false;
-        if($pre_stmt !== FALSE){
+        
+        if($count >= 1){
+            if($pre_stmt2 !== FALSE){
 
-            $pre_stmt->bind_param("iissssss", $organization_id, $user_id, $salary, $IIN, $darbiniekaVSAOI, $darbaDevejaIzmaksas, $salaryYear, $salaryMonth);
-            $result = $pre_stmt->execute() or die($this->con->error);
-            $response = true;
+                $pre_stmt2->bind_param("ssssiis", $salary, $IIN, $darbiniekaVSAOI, $darbaDevejaIzmaksas, $user_id, $salaryYear, $salaryMonth);
+                $result = $pre_stmt2->execute();
+                $response = true;
+
+            } else{
+                die('prepare() failed: ' . htmlspecialchars($this->con->error));
+            }
+
         } else {
-            die('prepare() failed: ' . htmlspecialchars($this->con->error));
+            if($pre_stmt2 !== FALSE){
+                $pre_stmt3->bind_param("iissssis", $organization_id, $user_id, $salary, $IIN, $darbiniekaVSAOI, $darbaDevejaIzmaksas, $salaryYear, $salaryMonth);
+                $result = $pre_stmt3->execute();
+                $response = true;
+                // $response = true;
+            } else{
+                die('prepare() failed: ' . htmlspecialchars($this->con->error));
+            }
+
         }
 
         return $response;
+
     }
 
     public function loadCurrentUserSalary(){

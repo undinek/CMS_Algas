@@ -250,18 +250,18 @@ $(document).ready(function() {
                method: "POST",
                data: $("#addSalaryForm").serialize(),
                success: function(data) {
-                 if(data == true){
+
+                 if(data == 1){
 
                    $('.alert-success').append("Alga Pievienota!").show();
                    setTimeout(function () {
                       location.reload();
                    }, 1000);
 
-                 }else{
-                   $('.alert-danger').append("Kaut kas nav kartiba!").show();
+                 } else{
+                    $('.alert-danger').append("Kaut kas nav kartiba!").show();
                  }
 
-                 console.log(data);
                 }
            });
        }
