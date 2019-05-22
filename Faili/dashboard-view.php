@@ -7,13 +7,16 @@ include_once("./includes/Organization.php");
 
 <?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true): ?>
 
-    <?php $role = new Role;
-          $obj = new Organization; ?>
+<?php
+    $role = new Role;
+    $obj = new Organization; ?>
+
+  <h3> <?php echo "Hei, ". $_SESSION["username"] ?> </h3>
 
 
 	<?php if ($role->user()): ?>
 
-    <h3>Jūsu alga uzņēmumā "<?php echo $obj->getCurrentUserOrganization() ?>" </h3>
+    <h3 style="margin-top:0!important">Jūsu alga uzņēmumā "<?php echo $obj->getCurrentUserOrganization() ?>" </h3>
     <table class="mainTable">
         <thead>
           <tr>
@@ -36,9 +39,7 @@ include_once("./includes/Organization.php");
 	<?php
     elseif ($role->admin()): ?>
 
-        <p>can add user salary</p>
-
-        <div class="container" style="margin-top:10%">
+        <div class="container">
           <div class="row">
                 <div class="col-sm-6">
                   <div class="card">
@@ -65,9 +66,7 @@ include_once("./includes/Organization.php");
 	<?php
     elseif ($role->superAdmin()): ?>
 
-        <p>can add organizations and users</p>
-
-      <div class="container" style="margin-top:10%">
+      <div class="container">
         <div class="row">
               <div class="col-sm-6">
                 <div class="card">
@@ -96,5 +95,6 @@ include_once("./includes/Organization.php");
       <?php header("Location:  http://127.0.0.1/CMS_Algas/Faili/"); ?>
 	<?php
     endif; ?>
+
 	<?php
 endif; ?>

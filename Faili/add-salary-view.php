@@ -6,6 +6,8 @@ include_once("./includes/user.php");
 ?>
 
 <?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && $role->admin()): ?>
+<div class="alert alert-success hide"></div>
+
 <div class="container" style="padding-top:5rem;">
         <div class="card mx-auto" style="width: 30rem;">
             <div class="card-header">Pievieno algu</div>
@@ -22,7 +24,7 @@ include_once("./includes/user.php");
 
                     <div class="form-group">
                           <select name="userDropdown" class="select-css">
-                            <option value="--">Organizacijas lietotajs</option>
+                            <option selected="true" disabled="disabled" value="--">Izvēlies lietotāju</option>
                             <?php
                             $user = new User;
                             echo $user->LoadOrganizationUsersDropdown();

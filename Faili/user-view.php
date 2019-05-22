@@ -17,6 +17,7 @@
             if( $obj->superAdmin()): ?>
             <th>Organization</th>
             <?php endif; ?>
+            <th>User role</th>
           </tr>
         <thead>
         <tbody>

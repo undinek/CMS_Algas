@@ -32,13 +32,27 @@ class Organization{
         include_once("database/db.php");
         $db = new Database();
         $this->con = $db->connect();
+        $obj = new Role;
+        $thisOrg = $_SESSION["org"];
 
-        $res = $this->con->query("SELECT * FROM `organizations` ORDER BY `id` ASC");
-        foreach($res as $row){
-            $id = $row["id"];
-            $name = $row["org_name"];
-            echo "<option value='$id'>$name</option>";
+        if($obj->superAdmin()){
+            $res = $this->con->query("SELECT * FROM `organizations` ORDER BY `id` ASC");
+            foreach($res as $row){
+                $id = $row["id"];
+                $name = $row["org_name"];
+                echo "<option value='$id'>$name</option>";
+            }
+        }else {
+
+          $res = $this->con->query("SELECT * FROM `organizations` WHERE `id` = $thisOrg ORDER BY `id` ASC");
+          foreach($res as $row){
+              $id = $row["id"];
+              $name = $row["org_name"];
+              echo "<option value='$id'>$name</option>";
+          }
+
         }
+
     }
 
     // Parādīs pievienotās organizācijas

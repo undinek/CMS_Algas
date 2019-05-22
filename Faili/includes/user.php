@@ -119,9 +119,10 @@ class User
           // $res = $this->con->query("SELECT * FROM `users` ORDER BY `id` ASC");
           $userId = $_SESSION["userid"];
           $res = $this->con->query("
-                  SELECT u.username, u.email, o.org_name
+                  SELECT u.username, u.email, u.role, o.org_name
                   FROM users u, organizations o
                   WHERE u.org_key = o.id
+                  ORDER BY u.org_key
           ");
 
 
@@ -133,10 +134,13 @@ class User
                   $username = $row["username"];
                   $email = $row["email"];
                   $org = $row["org_name"];
+                  $userRole = $row["role"];
+
                   echo '<tr>
                         <td>'.$username.'</td>
                         <td>'.$email.'</td>
                         <td>'.$org.'</td>
+                        <td>'.$userRole.'</td>
                         </tr>';
               }
 
@@ -147,6 +151,7 @@ class User
       }
 
       if($role->admin()){
+
           $res = $this->con->prepare("SELECT * FROM users WHERE org_key = ?");
           $res->bind_param("s",$userOrg);
           $res->execute() or die($this->con->error);
@@ -155,30 +160,16 @@ class User
           foreach($result as $row){
               $username = $row["username"];
               $email = $row["email"];
+              $userRole = $row["role"];
+
               echo '<tr>
                     <td>'.$username.'</td>
                     <td>'.$email.'</td>
+                    <td>'.$userRole.'</td>
                     </tr>';
           }
 
-		 if($role->user()){
-          $res = $this->con->prepare("SELECT * FROM users WHERE org_key = ?");
-          $res->bind_param("s",$userOrg);
-          $res->execute() or die($this->con->error);
-          $result = $res->get_result();
-
-          foreach($result as $row){
-              $username = $row["username"];
-              $email = $row["email"];
-              echo '<tr>
-                    <td>'.$username.'</td>
-                    <td>'.$email.'</td>
-                    </tr>';
-          }
       }
-
-
-  }
 }
 
 public function loadUserInDropdown(){
@@ -195,19 +186,42 @@ public function loadUserInDropdown(){
 }
 
 public function LoadOrganizationUsersDropdown(){
-  include_once("database/db.php");
-  include_once("Organization.php");
-  $db = new Database();
-  $this->con = $db->connect();
-  $user= new Organization();
-  $currentUserOrganization = $user->getCurrentUserOrganization();
+
+    include_once("database/db.php");
+    include_once("Organization.php");
+    $db = new Database();
+    $this->con = $db->connect();
+    $user= new Organization();
+    $currentUserOrganization = $user->getCurrentUserOrganization();
+    $obj = new Role;
 
 
-  $res = $this->con->query("SELECT users.username, users.id FROM users LEFT JOIN organizations ON users.org_key = organizations.id WHERE organizations.org_name = '$currentUserOrganization' ");
-  foreach($res as $row){
-      $id = $row["id"];
-      $name = $row["username"];
-      echo "<option value='$id'>$name</option>";
-  }
+
+    if ($_SERVER["SCRIPT_NAME"] == '/CMS_Algas/Faili/add-salary-view.php'){
+
+        $res = $this->con->query("
+            SELECT users.username, users.id
+            FROM users
+            LEFT JOIN organizations
+            ON users.org_key = organizations.id
+            WHERE organizations.org_name = '$currentUserOrganization'
+            AND users.role = 'User'
+        ");
+
+        foreach($res as $row){
+            $id = $row["id"];
+            $name = $row["username"];
+            echo "<option value='$id'>$name</option>";
+        }
+    } else {
+
+        $res = $this->con->query("SELECT users.username, users.id FROM users LEFT JOIN organizations ON users.org_key = organizations.id WHERE organizations.org_name = '$currentUserOrganization' ");
+        foreach($res as $row){
+            $id = $row["id"];
+            $name = $row["username"];
+            echo "<option value='$id'>$name</option>";
+        }
+    }
+
 }
 }

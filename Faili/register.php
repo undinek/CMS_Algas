@@ -8,7 +8,7 @@
 <?php
 if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && ($role->admin() || $role->superAdmin())):
 ?>
-
+    <div class="alert alert-success hide"></div>
     <br><br>
     <div class="container">
         <div class="card mx-auto" style="width: 30rem;">
@@ -42,7 +42,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && ($role-
 
                     <div class="form-group">
                           <select name="orgDropdown" class="select-css">
-                            <option value="--">Lietotāja organizācija</option>
+                            <option selected="true" disabled="disabled" value="--">Lietotāja organizācija</option>
                             <?php
                             $obj = new Organization;
                             echo $obj->loadOrganizationInDropdown();
@@ -52,7 +52,7 @@ if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && ($role-
 
                     <div class="form-group">
                           <select name="roleDropdown" class="select-css">
-                            <option value="--">Lietotāja grupa</option>
+                            <option selected="true" disabled="disabled" value="--">Lietotāja grupa</option>
                             <option value="User">User</option>
                             <option value="Admin">Admin</option>
                           </select>

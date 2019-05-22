@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var DOMAIN = "http://127.0.0.1/CMS_Algas/Faili";
+  $('.alert-success').hide();
   $("#register_form").on("submit", function() {
     var status = false;
     var username = $("#username");
@@ -73,10 +74,16 @@ $(document).ready(function() {
           } else if (data == "SOME_ERROR") {
             alert("Something Wrong");
           } else {
-            window.location.href = encodeURI(
-              DOMAIN +
-                "/user-view.php"
-            );
+
+            $('.alert-success').append("Lietotājs pievienots!").show();
+
+            setTimeout(function () {
+                 window.location.href = encodeURI(
+                   DOMAIN +
+                     "/user-view.php"
+                 );
+             }, 2000);
+
             // console.log(data);
           }
         }
@@ -162,7 +169,11 @@ $(document).ready(function() {
               data: $("#addOrganizationForm").serialize(),
               success: function(data) {
 
-                  window.location.href = encodeURI( DOMAIN + "/organization-view.php" );
+                  $('.alert-success').append("Organizācija pievienota!").show();
+                  setTimeout(function () {
+                      window.location.href = encodeURI( DOMAIN + "/organization-view.php" );
+                  }, 2000);
+
                   // console.log(data);
 
                 }
@@ -188,7 +199,13 @@ $(document).ready(function() {
                data: $("#addSalaryForm").serialize(),
                success: function(data) {
 
-                   window.location.href = encodeURI( DOMAIN + "/add-salary-view.php" );
+                   $('.alert-success').append("Alga pievienota!").show();
+
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+
 
                  }
            });

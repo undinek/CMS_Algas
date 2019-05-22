@@ -5,6 +5,7 @@
 ?>
 
 <?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && $role->superAdmin()): ?>
+<div class="alert alert-success hide"></div>
 <div class="container" style="padding-top:5rem;">
         <div class="card mx-auto" style="width: 30rem;">
             <div class="card-header">Pievieno organizāciju</div>
