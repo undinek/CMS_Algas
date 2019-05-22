@@ -38,7 +38,11 @@ class Salary{
         $darbaDevejaVSAOI = 0.2409 * $salary;
 
         $apliekamaSumma = $salary - $apgadajamaSumma - $darbiniekaVSAOI - $neapliekamais;
-        $IIN = $apliekamaSumma * 0.20;
+        if($apliekamaSumma < 0){
+          $IIN = 0;
+        }else{
+          $IIN = $apliekamaSumma * 0.20;
+        }
 
         $riskaNodeva = 0.36;
         $darbaDevejaIzmaksas = $salary + $darbaDevejaVSAOI + $riskaNodeva;
