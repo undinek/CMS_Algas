@@ -188,12 +188,16 @@ $(document).ready(function() {
                data: $("#addSalaryForm").serialize(),
                success: function(data) {
 
-                   window.location.href = encodeURI( DOMAIN + "/salary-view.php" );
+                   window.location.href = encodeURI( DOMAIN + "/add-salary-view.php" );
 
                  }
            });
        }
    });
+
+    $('#range').on("input", function() {
+        $('.output').val(this.value +" EUR" );
+    }).trigger("change");
 
 
 });

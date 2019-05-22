@@ -116,16 +116,34 @@ class User
 
 
       if($role->superAdmin()){
-          $res = $this->con->query("SELECT * FROM `users` ORDER BY `id` ASC");
+          // $res = $this->con->query("SELECT * FROM `users` ORDER BY `id` ASC");
+          $userId = $_SESSION["userid"];
+          $res = $this->con->query("
+                  SELECT u.username, u.email, o.org_name
+                  FROM users u, organizations o
+                  WHERE u.org_key = o.id
+          ");
 
-          foreach($res as $row){
-              $username = $row["username"];
-              $email = $row["email"];
-              echo '<tr>
-                    <td>'.$username.'</td>
-                    <td>'.$email.'</td>
-                    </tr>';
+
+
+
+          if($res !== FALSE) {
+
+              foreach($res as $row){
+                  $username = $row["username"];
+                  $email = $row["email"];
+                  $org = $row["org_name"];
+                  echo '<tr>
+                        <td>'.$username.'</td>
+                        <td>'.$email.'</td>
+                        <td>'.$org.'</td>
+                        </tr>';
+              }
+
+          } else {
+              die('prepare() failed: ' . htmlspecialchars($this->con->error));
           }
+
       }
 
       if($role->admin()){
@@ -142,7 +160,7 @@ class User
                     <td>'.$email.'</td>
                     </tr>';
           }
-		  
+
 		 if($role->user()){
           $res = $this->con->prepare("SELECT * FROM users WHERE org_key = ?");
           $res->bind_param("s",$userOrg);
@@ -183,7 +201,7 @@ public function LoadOrganizationUsersDropdown(){
   $this->con = $db->connect();
   $user= new Organization();
   $currentUserOrganization = $user->getCurrentUserOrganization();
-  
+
 
   $res = $this->con->query("SELECT users.username, users.id FROM users LEFT JOIN organizations ON users.org_key = organizations.id WHERE organizations.org_name = '$currentUserOrganization' ");
   foreach($res as $row){

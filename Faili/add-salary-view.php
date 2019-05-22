@@ -41,6 +41,14 @@ include_once("./includes/user.php");
                         <small id="u_error" class="form-text text-muted"></small>
                     </div>
 
+                    <div class="form-group">
+                        <p>Ar nodokli neapliekamā summa</p>
+                          <label for="range">
+                          <input type="range" name="range" id="range" min="0" max="230" step="1" value="115"/>
+                          </label>
+                          <output for="range" class="output"></output>
+                    </div>
+
                     <button type="submit" name="addSalary" class="btn btn-primary btnAddSalary">
                         <span class="fa fa-plus"></span>&nbsp;Pievienot</button>
                 </form>

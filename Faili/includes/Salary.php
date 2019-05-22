@@ -7,7 +7,7 @@ class Salary{
     function __construct(){
     }
 
-    public function addSalary($organization_id, $user_id, $salary, $apgadajamie, $citiAtvieglojumi){
+    public function addSalary($organization_id, $user_id, $salary, $apgadajamie, $citiAtvieglojumi, $neapliekamaisMin){
 
         include_once("../database/db.php");
         $db = new Database();
@@ -17,7 +17,7 @@ class Salary{
         $neapliekamais =0;
 
         if ($salary <= 1100){
-          $neapliekamais = 230;
+          $neapliekamais = $neapliekamaisMin;
         }
 
         $iedzivotajuIenakumuNodoklis;

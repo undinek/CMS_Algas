@@ -13,6 +13,10 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
+            <?php $obj = new Role;
+            if( $obj->superAdmin()): ?>
+            <th>Organization</th>
+            <?php endif; ?>
           </tr>
         <thead>
         <tbody>
