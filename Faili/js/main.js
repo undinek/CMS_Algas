@@ -206,7 +206,9 @@ $(document).ready(function() {
     var salaryValue = $("input[name=salaryValue]");
     var user = $("select[name=userDropdown]");
     var apgadajamie = $("input[name=apgadajamieValue]");
-    var salaryStatus, userStatus, apgadajamieStatus  = false;
+    var date = $("input[name=datepicker]");
+    var button = $("button[name=addSalary]");
+    var salaryStatus, userStatus, apgadajamieStatus, dateStatus  = false;
 
     if(salaryValue.val() == null || salaryValue.val() == "" ){
       salaryValue.addClass("border-danger");
@@ -244,24 +246,34 @@ $(document).ready(function() {
       apgadajamieStatus = true;
     }
 
-       if(salaryStatus && userStatus && apgadajamieStatus){
+    if(date.val() == null || date.val() == "" ){
+      date.addClass("border-danger");
+      $("#date_error").html(
+        "<span class = 'text-danger'>Lūdzu izvēlaties mēnesi</span>"
+      );
+      dateStatus = false;
+    }else{
+      date.removeClass("border-danger");
+      $("#date_error").html("");
+      dateStatus = true;
+    }
+
+       if(salaryStatus && userStatus && apgadajamieStatus && dateStatus){
            $.ajax({
                url: DOMAIN + "/includes/process.php",
                method: "POST",
                data: $("#addSalaryForm").serialize(),
                success: function(data) {
-
-                 if(data == 1){
-
-                   $('.alert-success').append("Alga Pievienota!").show();
-                   setTimeout(function () {
-                      location.reload();
-                   }, 1000);
-
-                 } else{
-                    $('.alert-danger').append("Kaut kas nav kartiba!").show();
+                 if(data == true){
+                    button.addClass("border-success");
+                    $("#button_error").html(
+                      "<span class = 'text-success'>Alga Pievienota!</span>"
+                    );
+                    window.setTimeout(function(){location.reload()},2000); //reload with time
+                 }else{
+                   $('.alert-danger').append("Kaut kas nav kartiba!").show();
                  }
-
+                 console.log(data);
                 }
            });
        }
