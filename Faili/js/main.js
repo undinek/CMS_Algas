@@ -157,25 +157,38 @@ $(document).ready(function() {
       window.location.href = encodeURI( DOMAIN + "/add-organization-view.php" );
   });
 
-  var orgName = $("input[name=orgName]");
-
   $("#addOrganizationForm").on("submit", function() {
+    var orgName = $("input[name=orgName]");
+    var orgStatus = false;
 
-      if(orgName.val() != null || orgName.val() != "" ){
+    if(orgName.val() == null || orgName.val() == "" ){
+      orgName.addClass("border-danger");
+      $("#org_error").html(
+        "<span class = 'text-danger'>Lūdzu ievadiet organizācijas nosaukumu</span>"
+      );
+      orgStatus = false;
+    }else{
+      orgName.removeClass("border-danger");
+      $("#org_error").html("");
+      orgStatus = true;
+    }
 
+      if(orgStatus){
           $.ajax({
               url: DOMAIN + "/includes/process.php",
               method: "POST",
               data: $("#addOrganizationForm").serialize(),
               success: function(data) {
-
-                  $('.alert-success').append("Organizācija pievienota!").show();
-                  setTimeout(function () {
-                      window.location.href = encodeURI( DOMAIN + "/organization-view.php" );
-                  }, 2000);
-
-                  // console.log(data);
-
+                  if(data == "smth went wrong"){
+                    setTimeout(function () {
+                      $('.alert-danger').append("Kaut kas nav kartiba!").show();
+                    }, 1000);
+                  }else{
+                    $('.alert-success').append("Organizācija pievienota!").show();
+                    setTimeout(function () {
+                        window.location.href = encodeURI( DOMAIN + "/organization-view.php" );
+                    }, 2000);
+                  }
                 }
           });
       }
@@ -189,25 +202,64 @@ $(document).ready(function() {
    /*Add salary page
    =========================*/
 
-   var salaryValue = $("input[name=salaryValue]");
    $("#addSalaryForm").on("submit", function() {
+    var salaryValue = $("input[name=salaryValue]");
+    var user = $("select[name=userDropdown]");
+    var apgadajamie = $("input[name=apgadajamieValue]");
+    var salaryStatus, userStatus, apgadajamieStatus  = false;
 
-       if(salaryValue.val() != null || salaryValue.val() != "" ){
+    if(salaryValue.val() == null || salaryValue.val() == "" ){
+      salaryValue.addClass("border-danger");
+      $("#salary_error").html(
+        "<span class = 'text-danger'>Lūdzu ievadiet algu</span>"
+      );
+      salaryStatus = false;
+    }else{
+      salaryValue.removeClass("border-danger");
+      $("#salary_error").html("");
+      salaryStatus = true;
+    }
+
+    if(user.val() == null || user.val() == "" ){
+      user.addClass("border-danger");
+      $("#u_error").html(
+        "<span class = 'text-danger'>Lūdzu izvēlaties lietotāju</span>"
+      );
+      userStatus = false;
+    }else{
+      user.removeClass("border-danger");
+      $("#u_error").html("");
+      userStatus = true;
+    }
+
+    if(apgadajamie.val() == null || apgadajamie.val() == "" ){
+      apgadajamie.addClass("border-danger");
+      $("#apgadajamie_error").html(
+        "<span class = 'text-danger'>Lūdzu izvēlaties apgadajamo skaitu</span>"
+      );
+      apgadajamieStatus = false;
+    }else{
+      apgadajamie.removeClass("border-danger");
+      $("#apgadajamie_error").html("");
+      apgadajamieStatus = true;
+    }
+    
+       if(salaryStatus && userStatus && apgadajamieStatus){
            $.ajax({
                url: DOMAIN + "/includes/process.php",
                method: "POST",
                data: $("#addSalaryForm").serialize(),
                success: function(data) {
-
-                   $('.alert-success').append("Alga pievienota!").show();
-
-
-                    setTimeout(function () {
-                        location.reload();
-                    }, 2000);
-
-
+                 if(data == "smth went wrong"){
+                  setTimeout(function () {
+                    $('.alert-danger').append("Kaut kas nav kartiba!").show();
+                  }, 1000);
+                 }else{
+                  setTimeout(function () {
+                    $('.alert-success').append("Alga Pievienota!").show();
+                  }, 1000);
                  }
+                }
            });
        }
    });

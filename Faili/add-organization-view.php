@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label>Organizācijas nosaukums</label>
                         <input type="text" name="orgName" class="form-control" id="orgName" placeholder="name here">
-                        <small id="u_error" class="form-text text-muted"></small>
+                        <small id="org_error" class="form-text text-muted"></small>
                     </div>
                     <button type="submit" name="addOrg" class="btn btn-primary btnAddOrg">
                         <span class="fa fa-user"></span>&nbsp;Pievienot</button>

@@ -24,23 +24,24 @@ include_once("./includes/user.php");
 
                     <div class="form-group">
                           <select name="userDropdown" class="select-css">
-                            <option selected="true" disabled="disabled" value="--">Izvēlies lietotāju</option>
+                            <option selected="true" disabled="disabled" value="">Izvēlies lietotāju</option>
                             <?php
                             $user = new User;
                             echo $user->LoadOrganizationUsersDropdown();
                             ?>
                           </select>
+                          <small id="u_error" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                         <label>Alga</label>
                         <input type="number" min="0" name="salaryValue" class="form-control" id="salaryValue" placeholder="alga">
-                        <small id="u_error" class="form-text text-muted"></small>
+                        <small id="salary_error" class="form-text text-muted"></small>
                     </div>
 
                     <div class="form-group">
                         <label>Apgādājamo skaits</label>
                         <input type="number" min="0" name="apgadajamieValue" class="form-control" id="apgadajamieValue" placeholder="Apgādājamo sk.">
-                        <small id="u_error" class="form-text text-muted"></small>
+                        <small id="apgadajamie_error" class="form-text text-muted"></small>
                     </div>
 
                     <div class="form-group">
