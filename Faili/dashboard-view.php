@@ -5,7 +5,7 @@ include_once("./includes/Salary.php");
 include_once("./includes/Organization.php");
 ?>
 
-<?php if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true): ?>
+<?php if (isset($_SESSION['isLoggedIn'])): ?>
 
 <?php
     $role = new Role;
@@ -25,6 +25,7 @@ include_once("./includes/Organization.php");
             <th>Sociālais nodoklis</th>
             <th>Neto</th>
             <th>Darba devējs izmaksā</th>
+            <th>Spēkā</th>
           </tr>
         <thead>
 

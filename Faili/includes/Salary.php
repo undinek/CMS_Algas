@@ -7,12 +7,15 @@ class Salary{
     function __construct(){
     }
 
-    public function addSalary($organization_id, $user_id, $salary, $apgadajamie, $citiAtvieglojumi, $neapliekamaisMin){
+    public function addSalary($organization_id, $user_id, $salary, $apgadajamie, $neapliekamaisMin, $date){
 
         include_once("../database/db.php");
         $db = new Database();
         $this ->con = $db ->connect();
 
+        $pieces = explode(" ", $date);
+        $salaryMonth = $pieces[0];
+        $salaryYear = (int)$pieces[1];
 
         $neapliekamais =0;
 
@@ -40,14 +43,18 @@ class Salary{
         $riskaNodeva = 0.36;
         $darbaDevejaIzmaksas = $salary + $darbaDevejaVSAOI + $riskaNodeva;
 
-        $pre_stmt = $this->con->prepare("INSERT INTO `salary`(`org_id`, `user_id`, `salary`, `IIN`, `socialais_nod`, `darba_dev_izmaksas` ) VALUES (?,?,?,?,?,?);");
-        $pre_stmt->bind_param("iissss", $organization_id, $user_id, $salary, $IIN, $darbiniekaVSAOI, $darbaDevejaIzmaksas);
-        $result = $pre_stmt->execute() or die($this->con->error);
+        $pre_stmt = $this->con->prepare("
+            INSERT INTO `salary`(`org_id`, `user_id`, `salary`, `IIN`, `socialais_nod`, `darba_dev_izmaksas`, `year`, `month` )
+            VALUES (?,?,?,?,?,?,?,?)");
 
-        if($result){
-            $response = "data saved";
+        $response = false;
+        if($pre_stmt !== FALSE){
+
+            $pre_stmt->bind_param("iissssss", $organization_id, $user_id, $salary, $IIN, $darbiniekaVSAOI, $darbaDevejaIzmaksas, $salaryYear, $salaryMonth);
+            $result = $pre_stmt->execute() or die($this->con->error);
+            $response = true;
         } else {
-            $response = 'smth went wrong';
+            die('prepare() failed: ' . htmlspecialchars($this->con->error));
         }
 
         return $response;
@@ -60,7 +67,7 @@ class Salary{
         $db = new Database();
         $this->con = $db->connect();
 
-        $res = $this->con->query("SELECT * FROM salary WHERE user_id = $userId");
+        $res = $this->con->query("SELECT * FROM salary WHERE user_id = $userId ORDER BY year");
 
 
         foreach($res as $row){
@@ -69,6 +76,8 @@ class Salary{
             $socNod = $row["socialais_nod"];
             $count = $salary - $IIN - $socNod;
             $darbaDevejaIzmaksas = $row["darba_dev_izmaksas"];
+            $salaryYear = $row["year"];
+            $salaryMonth = $row["month"];
 
             echo '<tr>
                   <td>'.$salary.'</td>
@@ -76,6 +85,7 @@ class Salary{
                   <td>'.$socNod.'</td>
                   <td>'.$count.'</td>
                   <td>'.$darbaDevejaIzmaksas.'</td>
+                  <td>'.$salaryMonth = $row["month"]." ".$salaryYear = $row["year"] .'</td>
                   </tr>';
         }
 

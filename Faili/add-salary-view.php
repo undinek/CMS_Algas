@@ -47,10 +47,25 @@ include_once("./includes/user.php");
                     <div class="form-group">
                         <p>Ar nodokli neapliekamā summa</p>
                           <label for="range">
-                          <input type="range" name="range" id="range" min="0" max="230" step="1" value="115"/>
+                          <input type="range" name="range" id="range" min="0" max="230" step="1" value="0"/>
                           </label>
                           <output for="range" class="output"></output>
                     </div>
+
+                    <div class="form-group">
+                      <p>Izvēlies mēnesi</p>
+                      <label>
+                      <input type="text"
+                         name="datepicker"
+                         id="datepicker"
+                         class="datepicker-here"
+                         data-language='en'
+                         data-min-view="months"
+                         data-view="months"
+                         data-date-format="MM yyyy" />
+                       </label>
+                    </div>
+
 
                     <button type="submit" name="addSalary" class="btn btn-primary btnAddSalary">
                         <span class="fa fa-plus"></span>&nbsp;Pievienot</button>

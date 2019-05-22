@@ -21,6 +21,10 @@ include_once ("includes/Role.php"); ?>
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
+    <link href="./css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <script src="./js/datepicker.min.js"></script>
+    <!-- Include English language -->
+    <script src="./js/i18n/datepicker.en.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
 </head>
 

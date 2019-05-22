@@ -243,22 +243,25 @@ $(document).ready(function() {
       $("#apgadajamie_error").html("");
       apgadajamieStatus = true;
     }
-    
+
        if(salaryStatus && userStatus && apgadajamieStatus){
            $.ajax({
                url: DOMAIN + "/includes/process.php",
                method: "POST",
                data: $("#addSalaryForm").serialize(),
                success: function(data) {
-                 if(data == "smth went wrong"){
-                  setTimeout(function () {
-                    $('.alert-danger').append("Kaut kas nav kartiba!").show();
-                  }, 1000);
+                 if(data == true){
+
+                   $('.alert-success').append("Alga Pievienota!").show();
+                   setTimeout(function () {
+                      location.reload();
+                   }, 1000);
+
                  }else{
-                  setTimeout(function () {
-                    $('.alert-success').append("Alga Pievienota!").show();
-                  }, 1000);
+                   $('.alert-danger').append("Kaut kas nav kartiba!").show();
                  }
+
+                 console.log(data);
                 }
            });
        }
