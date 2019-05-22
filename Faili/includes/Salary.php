@@ -69,7 +69,7 @@ class Salary{
         // Ja tabulā jau pievienota alga konkrētajam mēnesim/gadam pārrakstam ievadītās algas vērtības
         // Ja nav tad izveido jaunu ierakstu
         $response = false;
-        
+
         if($count >= 1){
             if($pre_stmt2 !== FALSE){
 
@@ -82,7 +82,7 @@ class Salary{
             }
 
         } else {
-            if($pre_stmt2 !== FALSE){
+            if($pre_stmt3 !== FALSE){
                 $pre_stmt3->bind_param("iissssis", $organization_id, $user_id, $salary, $IIN, $darbiniekaVSAOI, $darbaDevejaIzmaksas, $salaryYear, $salaryMonth);
                 $result = $pre_stmt3->execute();
                 $response = true;
