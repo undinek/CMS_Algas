@@ -2,14 +2,13 @@ $(document).ready(function() {
   var DOMAIN = "http://127.0.0.1/CMS_Algas/Faili";
   $('.alert-success').hide();
   $("#register_form").on("submit", function() {
-    var status = false;
+    var userStatus, passStatus, emailStatus, matchedStatus = false;
     var username = $("#username");
     var email = $("#email");
     var pass1 = $("#password1");
     var pass2 = $("#password2");
     var type = $("#usertype");
     var n_patt = new RegExp(/^[A-Za-z ]+$/);
-    //alvis.skeps98@gmail.com
     var e_patt = new RegExp(
       /^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/
     );
@@ -20,11 +19,11 @@ $(document).ready(function() {
       $("#u_error").html(
         "<span class = 'text-danger'>Lūdzu ievadiet lietotājvārdu, tam jāsastāv no vismaz 6 simboliem</span>"
       );
-      status = false;
+      userStatus = false;
     } else {
       username.removeClass("border-danger");
       $("#u_error").html("");
-      status = true;
+      userStatus = true;
     }
     //Checks E-mail
     if (!e_patt.test(email.val())) {
@@ -32,11 +31,11 @@ $(document).ready(function() {
       $("#e_error").html(
         "<span class = 'text-danger'>Lūdzu ievadiet derīgu E-pasta adresi</span>"
       );
-      status = false;
+      emailStatus = false;
     } else {
       email.removeClass("border-danger");
       $("#e_error").html("");
-      status = true;
+      emailStatus = true;
     }
     //Checks Password
     if (pass1.val() == "" || pass1.val().length < 9) {
@@ -44,11 +43,11 @@ $(document).ready(function() {
       $("#p1_error").html(
         "<span class = 'text-danger'>Parolei jāsastāv no vismaz 9 simboliem</span>"
       );
-      status = false;
+      passStatus = false;
     } else {
       pass1.removeClass("border-danger");
       $("#p1_error").html("");
-      status = true;
+      passStatus = true;
     }
     //Checks Password2
     if (pass2.val() == "" || pass2.val().length < 9) {
@@ -56,14 +55,29 @@ $(document).ready(function() {
       $("#p2_error").html(
         "<span class = 'text-danger'>Parolei jāsastāv no vismaz 9 simboliem</span>"
       );
-      status = false;
+      passStatus = false;
     } else {
       pass2.removeClass("border-danger");
       $("#p2_error").html("");
-      status = true;
+      passStatus = true;
     }
+
     //Checks if passwords are matched
-    if (pass2.val() == pass1.val() && status == true) {
+    if (pass2.val() == pass1.val() ) {
+      pass2.removeClass("border-danger");
+      $("#p2_error").html("");
+      matchedStatus = true;
+    } else {
+      pass2.addClass("border-danger");
+      $("#p2_error").html(
+        "<span class = 'text-danger'>Paroles nesakrīt</span>"
+    );
+      matchedStatus = true;
+    }
+
+
+    //Checks if all corect
+    if (userStatus && emailStatus && passStatus && matchedStatus) {
       $.ajax({
         url: DOMAIN + "/includes/process.php",
         method: "POST",
@@ -83,17 +97,9 @@ $(document).ready(function() {
                      "/user-view.php"
                  );
              }, 2000);
-
-            // console.log(data);
           }
         }
       });
-    } else {
-      pass2.addClass("border-danger");
-      $("#p2_error").html(
-        "<span class = 'text-danger'>Paroles nesakrīt</span>"
-      );
-      status = true;
     }
   });
   //For login PART
