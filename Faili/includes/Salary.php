@@ -108,8 +108,31 @@ class Salary{
         $db = new Database();
         $this->con = $db->connect();
 
-        $res = $this->con->query("SELECT * FROM salary WHERE user_id = $userId ORDER BY year");
+        // $res = $this->con->query("SELECT * FROM salary WHERE user_id = $userId ORDER BY year");
+        $res = $this->con->query("
+            SELECT * FROM salary
+            WHERE user_id = $userId
+            ORDER BY year,
+            CASE salary.month
+              WHEN 'Janvāris' THEN 1
+              WHEN 'Februāris' THEN 2
+              WHEN 'Marts' THEN 3
+              WHEN 'Aprīlis' THEN 4
+              WHEN 'Maijs' THEN 5
+              WHEN 'Jūnijs' THEN 6
+              WHEN 'Jūlijs' THEN 7
+              WHEN 'Augusts' THEN 8
+              WHEN 'Septembris' THEN 9
+              WHEN 'Oktobris' THEN 10
+              WHEN 'Novembris' THEN 11
+              WHEN 'Decembris' THEN 12
+            END;");
 
+        if($res !== FALSE){
+
+        }else{
+          die('prepare() failed: ' . htmlspecialchars($this->con->error));
+        }
 
         foreach($res as $row){
             $salary = $row["salary"];
