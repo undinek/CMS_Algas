@@ -90,12 +90,11 @@ include_once("./includes/Organization.php");
         </div>
       </div>
 
+      <?php endif; ?>
 
 	<?php
     else: ?>
       <?php header("Location:  http://127.0.0.1/CMS_Algas/Faili/"); ?>
-	<?php
-    endif; ?>
 
 	<?php
 endif; ?>
